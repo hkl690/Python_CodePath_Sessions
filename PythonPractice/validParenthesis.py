@@ -38,3 +38,14 @@ print(isValid(s)) # False
 # Example 4
 s = "()[]{}" # no whitespace
 print(isValid(s)) # True
+
+
+
+# Iteration Over the String:
+# The function iterates over each character in the string s exactly once. This gives a time complexity of (O(n)).
+# Stack Operations:
+# Pushing an element onto the stack and popping an element from the stack both take (O(1)) time. 
+# Since each character is pushed and popped at most once, the total time for stack operations is (O(n)).
+# Dictionary Lookups:
+# Checking if a character is in the dictionary and accessing the dictionary values both take (O(1)) time.
+# Combining these factors, the overall time complexity of the function is (O(n)).
