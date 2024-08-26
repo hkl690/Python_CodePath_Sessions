@@ -5,12 +5,12 @@
     <ProjectGuid>dd1177bb-406f-44bc-ad1d-1d29dd2fa5c8</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>LongestConsecutiveSequence.py</StartupFile>
+    <StartupFile>FifthMostViewed.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>Session1</Name>
+    <Name>Sessions</Name>
     <RootNamespace>PythonPractice</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -23,6 +23,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ContainsDuplicates.py" />
+    <Compile Include="FifthMostViewed.py" />
     <Compile Include="LongestConsecutiveSequence.py" />
     <Compile Include="TwoSum.py" />
   </ItemGroup>
