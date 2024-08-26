@@ -9,6 +9,7 @@ def fifth_most_viewed(webpages):
         heapq.heappush(min_heap, (views, page))
         if len(min_heap) > 5:
             heapq.heappop(min_heap)
+    print("Min_heap top 5: ", min_heap)
     return heapq.heappop(min_heap)[1]
 
 webpages = [("page1", 100), ("page2", 200), ("page3", 300), ("page4", 400), ("page5", 500), ("page6", 600)]
