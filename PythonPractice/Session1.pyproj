@@ -5,7 +5,7 @@
     <ProjectGuid>dd1177bb-406f-44bc-ad1d-1d29dd2fa5c8</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>TwoSum.py</StartupFile>
+    <StartupFile>LongestConsecutiveSequence.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
