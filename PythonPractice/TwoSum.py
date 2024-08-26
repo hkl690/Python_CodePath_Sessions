@@ -5,7 +5,22 @@ def twoSum(nums, target):
             if nums[i] + nums[j] == target:
                 return [i, j]
 
+def twoSumDict(nums, target):
+    dict = {}
+    
+    for i, num in enumerate(nums):
+        # If we see the counterpart in our hashmap(dict) then return the index of the counterpart and current index
+        if num in dict:            
+            return [dict[num], i]
+        # Store the counterpart of the number we have seen and current index
+        dict[target - num] = i
+        
+
 print(twoSum([2,7,11,15], 9))
+print(twoSumDict([2,7,11,15], 9))
 print(twoSum([2,7,11,15], 26))
+print(twoSumDict([2,7,11,15], 26))
 print(twoSum([3,2,4], 6))
+print(twoSumDict([3,2,4], 6))
 print(twoSum([3,3], 6))
+print(twoSumDict([3,3], 6))
