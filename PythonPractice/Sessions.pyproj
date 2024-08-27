@@ -5,7 +5,7 @@
     <ProjectGuid>dd1177bb-406f-44bc-ad1d-1d29dd2fa5c8</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>kthLargest.py</StartupFile>
+    <StartupFile>RecentCalls.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,6 +26,7 @@
     <Compile Include="FifthMostViewed.py" />
     <Compile Include="kthLargest.py" />
     <Compile Include="LongestConsecutiveSequence.py" />
+    <Compile Include="RecentCalls.py" />
     <Compile Include="TwoSum.py" />
     <Compile Include="validParenthesis.py" />
   </ItemGroup>
