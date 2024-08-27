@@ -5,7 +5,7 @@
     <ProjectGuid>dd1177bb-406f-44bc-ad1d-1d29dd2fa5c8</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>RecentCalls.py</StartupFile>
+    <StartupFile>Unit2\RemoveDuplicatesFromSortedList.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -28,7 +28,11 @@
     <Compile Include="LongestConsecutiveSequence.py" />
     <Compile Include="RecentCalls.py" />
     <Compile Include="TwoSum.py" />
+    <Compile Include="Unit2\RemoveDuplicatesFromSortedList.py" />
     <Compile Include="validParenthesis.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Unit2\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
