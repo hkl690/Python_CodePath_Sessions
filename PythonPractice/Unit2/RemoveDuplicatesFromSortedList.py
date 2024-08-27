@@ -78,3 +78,23 @@ Output: [1,2,3]
 # The function iterates through the linked list once, visiting each node exactly one time.
 # In each iteration, it performs a constant amount of work (checking and updating pointers).
 # Since the function processes each node only once, the overall time complexity is linear, or O(n).
+
+
+# CodePath solution using two pointers:
+# class Solution:
+#     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         # Establish two pointers
+#         prev = curr = head
+        
+#         # While two pointers are not null
+#         while curr:
+#             # Re-assign 'next' of each node to a node with a different value
+#             while curr and prev.val == curr.val:
+#                 curr = curr.next
+#             prev.next = curr
+            
+#             # Move both pointers to the node with a different value
+#             prev = curr
+        
+#         # Return the head node
+#         return head
