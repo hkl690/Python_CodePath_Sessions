@@ -28,6 +28,7 @@
     <Compile Include="LongestConsecutiveSequence.py" />
     <Compile Include="RecentCalls.py" />
     <Compile Include="TwoSum.py" />
+    <Compile Include="Unit2\LinkedListCycle.py" />
     <Compile Include="Unit2\RemoveDuplicatesFromSortedList.py" />
     <Compile Include="validParenthesis.py" />
   </ItemGroup>
