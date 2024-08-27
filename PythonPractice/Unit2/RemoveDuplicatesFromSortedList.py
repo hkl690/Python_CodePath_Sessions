@@ -69,3 +69,12 @@ Example 2:
 Input: head = [1,1,2,3,3]
 Output: [1,2,3]
 """
+
+# The runtime complexity of the deleteDuplicates function is O(n), 
+# where n is the number of nodes in the linked list.
+
+# Here’s why:
+
+# The function iterates through the linked list once, visiting each node exactly one time.
+# In each iteration, it performs a constant amount of work (checking and updating pointers).
+# Since the function processes each node only once, the overall time complexity is linear, or O(n).
