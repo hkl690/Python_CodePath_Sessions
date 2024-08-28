@@ -50,7 +50,7 @@ def printLinkedList(head: ListNode):
         visited.add(current)
         print(current.val, end=" -> ")
         current = current.next
-    print("None")
+    print("None (no cycle)")
 
 # Create the linked list nodes
 node1 = ListNode(3)
