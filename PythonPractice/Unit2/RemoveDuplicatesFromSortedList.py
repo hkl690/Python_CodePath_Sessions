@@ -27,12 +27,12 @@ class ListNode:
       self.next = next  # reference to the next node in the list
       
 def deleteDuplicates(head: ListNode) -> ListNode:
-    current = head
+    current = head  # Initialize current to the head of the list
     while current and current.next:
        if current.val == current.next.val:
-          current.next = current.next.next
+          current.next = current.next.next  # Skip the duplicate node
        else:
-          current = current.next
+          current = current.next    # Move to the next node
     return head
 
 # Function to print the linked list with a label
