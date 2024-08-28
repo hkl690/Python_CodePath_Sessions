@@ -23,8 +23,8 @@ Constraints
 
 class ListNode:
   def __init__(self, val=0, next=None):
-      self.val = val
-      self.next = next
+      self.val = val    # value stored in the node
+      self.next = next  # reference to the next node in the list
       
 def deleteDuplicates(head: ListNode) -> ListNode:
     current = head
