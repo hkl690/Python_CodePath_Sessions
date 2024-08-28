@@ -22,17 +22,18 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ContainsDuplicates.py" />
-    <Compile Include="FifthMostViewed.py" />
-    <Compile Include="kthLargest.py" />
-    <Compile Include="LongestConsecutiveSequence.py" />
-    <Compile Include="RecentCalls.py" />
-    <Compile Include="TwoSum.py" />
+    <Compile Include="Unit1\ContainsDuplicates.py" />
+    <Compile Include="Unit1\FifthMostViewed.py" />
+    <Compile Include="Unit1\kthLargest.py" />
+    <Compile Include="Unit1\LongestConsecutiveSequence.py" />
+    <Compile Include="Unit1\RecentCalls.py" />
+    <Compile Include="Unit1\TwoSum.py" />
     <Compile Include="Unit2\LinkedListCycle.py" />
     <Compile Include="Unit2\RemoveDuplicatesFromSortedList.py" />
-    <Compile Include="validParenthesis.py" />
+    <Compile Include="Unit1\validParenthesis.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Unit1\" />
     <Folder Include="Unit2\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
