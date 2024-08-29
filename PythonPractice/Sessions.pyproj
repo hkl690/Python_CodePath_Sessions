@@ -5,7 +5,7 @@
     <ProjectGuid>dd1177bb-406f-44bc-ad1d-1d29dd2fa5c8</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Unit2\LinkedListCycle.py</StartupFile>
+    <StartupFile>Aug2024_Unit2\LinkedListCycle.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,19 +22,19 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Unit1\ContainsDuplicates.py" />
-    <Compile Include="Unit1\FifthMostViewed.py" />
-    <Compile Include="Unit1\kthLargest.py" />
-    <Compile Include="Unit1\LongestConsecutiveSequence.py" />
-    <Compile Include="Unit1\RecentCalls.py" />
-    <Compile Include="Unit1\TwoSum.py" />
-    <Compile Include="Unit2\LinkedListCycle.py" />
-    <Compile Include="Unit2\RemoveDuplicatesFromSortedList.py" />
-    <Compile Include="Unit1\validParenthesis.py" />
+    <Compile Include="Aug2024_Unit1\ContainsDuplicates.py" />
+    <Compile Include="Aug2024_Unit1\FifthMostViewed.py" />
+    <Compile Include="Aug2024_Unit1\kthLargest.py" />
+    <Compile Include="Aug2024_Unit1\LongestConsecutiveSequence.py" />
+    <Compile Include="Aug2024_Unit1\RecentCalls.py" />
+    <Compile Include="Aug2024_Unit1\TwoSum.py" />
+    <Compile Include="Aug2024_Unit2\LinkedListCycle.py" />
+    <Compile Include="Aug2024_Unit2\RemoveDuplicatesFromSortedList.py" />
+    <Compile Include="Aug2024_Unit1\validParenthesis.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Unit1\" />
-    <Folder Include="Unit2\" />
+    <Folder Include="Aug2024_Unit1\" />
+    <Folder Include="Aug2024_Unit2\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
