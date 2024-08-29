@@ -1,3 +1,5 @@
+from typing import Optional, Any
+
 # Problem 1
 def welcome():
     print("Welcome to The Hundred Acre Wood!")
@@ -43,7 +45,7 @@ print_catchphrase("Chris")
 # Problem 4: Return Item
 # Implement a function get_item() that accepts a 0-indexed list items and a non-negative integer x 
 # and returns the element at index x in items. If x is not a valid index of items, return None.
-def get_item(items: list, x: int):
+def get_item(items: list, x: int) -> Optional[Any]:
     if 0 <= x < len(items):
         return items[x]
     else:
@@ -58,3 +60,19 @@ items2 = ["piglet", "pooh", "roo", "rabbit"]
 x = 5
 print(get_item(items2, x)) # output None
         
+# Problem 5: Total Honey
+# Winnie the Pooh wants to know how much honey he has. Write a function sum_honey() that accepts 
+# a list of integers hunny_jars and returns the sum of all elements in the list. Do not use the 
+# built-in function sum().
+def sum_honey(hunny_jars: list) -> int:
+    total = 0
+    for jar in hunny_jars:
+        total += jar
+    return total
+
+# Example tests
+hunny_jars1 = [2, 3, 4, 5]
+print(f"Hunny jars sum total: {sum_honey(hunny_jars1)}") # output 14
+
+hunny_jars2 = []
+print(f"Hunny jars sum total: {sum_honey(hunny_jars2)}") # output 0
