@@ -118,3 +118,32 @@ print("Poohsticks 0: ", count_less_than(race_times, threshold)) # output 0
 race_times = [91, 32, 83, 54, 5, 6]
 threshold = 10
 print("Poohsticks 10: ", count_less_than(race_times, threshold)) # output 2
+
+# nested loop example
+for i in range(1, 4):
+    print("Outer loop incremented")
+    for j in range(1, 4):
+        print(f"i = {i}, j = {j}")
+
+# Problem 8: Pooh's To Do's
+# Write a function print_todo_list() that accepts a list of strings named tasks. 
+# The function should then number and print each task on a new line using the format:
+
+# Pooh's To Dos:
+# 1. Task 1
+# 2. Task 2
+
+def print_todo_list(task):
+    print("Pooh's To Dos:")
+    
+    index = 1
+    for t in task:
+        print(f"{index}. {t}")
+        index += 1
+       
+task = []
+print_todo_list(task)
+
+task = ["Count all the bees in the hive", "Chase all the clouds from the sky", "Think", "Stoutness Exercises"]
+print_todo_list(task)
+
