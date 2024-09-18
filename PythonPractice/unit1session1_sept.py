@@ -88,3 +88,33 @@ def doubled(hunny_jars):
     
 hunny_jars = [1, 2, 3]
 print(doubled(hunny_jars))
+
+# Problem 7: Poohsticks
+# Winnie the Pooh and his friends are playing a game called Poohsticks where they drop sticks 
+# in a stream and race them. They time how long it takes each player's stick to float under 
+# Poohsticks Bridge to score each round.
+
+# Write a function count_less_than() to help Pooh and his friends determine how many players 
+# should move on to the next round of Poohsticks. count_less_than() should accept a 
+# list of integers race_times and an integer threshold and return the number of race times less 
+# than threshold.
+
+def count_less_than(race_times, threshold):
+    counter = 0
+    for race_time in race_times:
+        if race_time < threshold:
+            counter += 1
+
+    return counter
+
+race_times = [1, 2, 3, 4, 5, 6]
+threshold = 4
+print("Poohsticks 3: ", count_less_than(race_times, threshold)) # output 3
+
+race_times = []
+threshold = 4
+print("Poohsticks 0: ", count_less_than(race_times, threshold)) # output 0
+
+race_times = [91, 32, 83, 54, 5, 6]
+threshold = 10
+print("Poohsticks 10: ", count_less_than(race_times, threshold)) # output 2
