@@ -136,11 +136,20 @@ for i in range(1, 4):
 def print_todo_list(task):
     print("Pooh's To Dos:")
     
-    index = 1
-    for t in task:
-        print(f"{index}. {t}")
-        index += 1
+    # 1. can also enumerate, is same as below
+    # for index, t in enumerate(task, start=1):
+    #     print(f"{index}. {t}")
+
+    # 2.
+    # index = 1
+    # for t in task:
+    #     print(f"{index}. {t}")
+    #     index += 1
        
+    # 3. using the range function
+    for t in range(len(task)):
+        print(f"{t+1}. {task[t]}")
+
 task = []
 print_todo_list(task)
 
