@@ -17,3 +17,22 @@ print(reverse_sentence(sentence))
 
 sentence = "Pooh"
 print(reverse_sentence(sentence))
+
+
+# Session 2 problem 7
+
+def nanana_batman(x):
+    # Initialize an empty string to accumulate the "na"s
+    na_string = ""
+    
+    # Use a for loop to repeat "na" x times
+    for _ in range(x):
+        na_string += "na"
+    
+    # Concatenate " batman!" to the repeated "na" string
+    result = na_string + " batman!"
+    
+    # Print the result
+    print(result)
+
+nanana_batman(6)
