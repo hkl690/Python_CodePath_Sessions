@@ -36,3 +36,4 @@ def nanana_batman(x):
     print(result)
 
 nanana_batman(6)
+
