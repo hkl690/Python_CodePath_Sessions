@@ -304,8 +304,7 @@ import ast
 
 def find_value_index(matrix, value):
     # Write your code here
-    n = len(matrix)
-    for i in range(n):
+    for i in range(len(matrix)):
         for j in range(len(matrix[i])):  
             if matrix[i][j] == value:
                 return [i,j]
@@ -316,3 +315,27 @@ matrix = [[1,2,3,4], [5,6,7,8], [9,10,11,12]]
 value = 12
 print(find_value_index(matrix, value)) # ouput [2,3]
 
+# Complete the 'valid_mountain_array' function below.
+#
+# The function is expected to return a BOOLEAN.
+# The function accepts INTEGER_ARRAY arr as parameter.
+
+def valid_mountain_array(arr):
+    # Write your code here
+    i = 0
+    if len(arr) < 3:
+        return False
+    
+    while i < len(arr) - 1 and arr[i] < arr[i + 1]:
+        i += 1
+    if i == 0 or i == len(arr) - 1:
+        return False
+
+    while i < len(arr) - 1 and arr[i] > arr[i+1]:
+        i += 1
+    return i == len(arr) - 1
+
+arr = [2,1] # false
+print(valid_mountain_array(arr))
+print(valid_mountain_array([3,5,5])) # false
+print(valid_mountain_array([0,3,2,1])) # true
