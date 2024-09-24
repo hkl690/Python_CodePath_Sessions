@@ -5,7 +5,7 @@
     <ProjectGuid>dd1177bb-406f-44bc-ad1d-1d29dd2fa5c8</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>unit1session2_sept.py</StartupFile>
+    <StartupFile>unit2sessions_sept.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="unit1session1_sept.py" />
     <Compile Include="unit1session2_sept.py" />
+    <Compile Include="unit2sessions_sept.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
