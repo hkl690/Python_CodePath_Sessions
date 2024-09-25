@@ -138,3 +138,152 @@ print(keys_outside_range)  # Output: ['Storage Bay']
 keys_within_range = [key for key, value in oxygen_levels.items() if min_val <= value <= max_val]
 
 print(keys_within_range)  # Output: ['Command Module', 'Habitation Module', 'Laboratory Module', 'Airlock']
+
+
+# 5
+word = "encourage"
+char_count = {}
+for char in word:
+    if char not in char_count:
+        char_count[char] = 1
+    else:
+        char_count[char] += 1
+char_count['e'] += 2
+print(char_count['e'])
+
+bart = {"first name": "Bart", "last name": "Simpson", "age": "10", "hometown": "Springfield"}
+print(bart["hometown"])
+print(bart.get("hometown"))
+print(bart.pop("hometown"))
+
+def mystery_function(old_dictionary):
+    new_dictionary = {}
+
+    for key, value in old_dictionary.items():
+        new_dictionary[value] = key
+    return new_dictionary
+
+old_dictionary = {'a': 1, 'b': 2, 'c': 3}
+new_dictionary = mystery_function(old_dictionary)
+print(new_dictionary)
+
+# Complete the 'get_top_player' function
+# It is expected to return a STRING
+
+def get_top_player(dictionary):
+    high_score = 0
+    top_player = ""
+
+    for name, score in dictionary.items():
+        if score > high_score:
+            high_score = score
+            top_player = name
+
+    return top_player
+
+old_dictionary = {'c': 3, 'a': 1, 'b': 2}
+print(get_top_player(old_dictionary))
+
+# 1
+
+def find_min_index_of_repeating(arr):
+    if len(arr) == 0:
+        return None
+
+    seen = {}
+    for i, value in enumerate(arr):
+        if value in seen:
+            return seen[value]
+        seen[value] = i
+    return None
+
+arr = [10,21,22,33,44,55,33]
+print(find_min_index_of_repeating(arr))
+
+
+#
+# Complete the 'intersection' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY nums1
+#  2. INTEGER_ARRAY nums2
+#
+
+def intersection(nums1, nums2):
+    # Write your code here
+    if len(nums1) == 0 or len(nums2) == 0:
+        return []
+        
+    set1 = set(nums1)
+    set2 = set(nums2)
+    
+    intersection_set = set1.intersection(set2)
+    
+    return sorted(list(intersection_set))
+
+# Example 1:
+nums1 = [1,2,2,1] 
+nums2 = [2,2]
+print(intersection(nums1, nums2))
+# Output: [2]
+
+# Example 2:
+nums1 = [4,9,5]
+nums2 = [9,4,9,8,4]
+print(intersection(nums1, nums2))
+# Output: [9,4] <-- incorrect, is [4,9]
+
+# Example 3: Both arrays are empty
+nums1 = []
+nums2 = []
+print(intersection(nums1, nums2))  # Output: []
+
+# Example 4: No intersection
+nums1 = [1, 2, 3]
+nums2 = [4, 5, 6]
+print(intersection(nums1, nums2))  # Output: []
+
+# Example 5: Single element intersection
+nums1 = [1, 2, 3]
+nums2 = [3, 4, 5]
+print(intersection(nums1, nums2))  # Output: [3]
+
+# Example 6: All elements intersection
+nums1 = [1, 2, 3]
+nums2 = [1, 2, 3]
+print(intersection(nums1, nums2))  # Output: [1, 2, 3]
+
+# Example 7: Different lengths
+nums1 = [1, 2, 3, 4, 5]
+nums2 = [2, 4]
+print(intersection(nums1, nums2))  # Output: [2, 4]
+
+# Example 8: Negative numbers
+nums1 = [-1, -2, -3, 4]
+nums2 = [-3, 4, 5]
+print(intersection(nums1, nums2))  # Output: [-3, 4]
+
+
+
+def roman_to_int(s: str) -> int:
+    roman_values = {
+        'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    total = 0
+    prev_value = 0
+
+    for char in reversed(s): # reversed is a built-in function, does the same as s[::-1]
+        value = roman_values[char]
+        if value < prev_value:
+            total -= value
+        else:
+            total += value
+        prev_value = value
+
+    return total
+
+print(roman_to_int("III")) # 3
+print(roman_to_int("LVIII")) # 58
+print(roman_to_int("MCMXCIV")) # 1994
+print(roman_to_int("IV")) #4
+print(roman_to_int("XI")) #11
