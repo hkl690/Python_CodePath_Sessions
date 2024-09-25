@@ -283,7 +283,7 @@ def roman_to_int(s: str) -> int:
     return total
 
 print(roman_to_int("III")) # 3
-print(roman_to_int("LVIII")) # 58
-print(roman_to_int("MCMXCIV")) # 1994
+print(roman_to_int("LVIII")) # 58   <- IIIVL in reverse
+print(roman_to_int("MCMXCIV")) # 1994   <-- VICXMCM in reverse
 print(roman_to_int("IV")) #4
 print(roman_to_int("XI")) #11
