@@ -441,3 +441,4 @@ print(find_longest_harmonious_travel_sequence(durations1)) # 5
 print(find_longest_harmonious_travel_sequence(durations2)) # 2
 print(find_longest_harmonious_travel_sequence(durations3)) # 0
 print(find_longest_harmonious_travel_sequence(durations4)) # 10
+
