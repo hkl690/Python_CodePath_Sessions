@@ -400,3 +400,44 @@ key2 = "eljuxhpwnyrdgtqkviszcfmabo"
 message2 = "hntu depcte lxejw lxwntu zwx piqfx"
 
 print(decode_message(key2, message2)) # Example Output 2: find laguna beach behind the grove
+
+
+
+# Problem 4: Longest Harmonious Travel Sequence
+# In a list of travel packages, we define a harmonious travel sequence as a sequence where the difference between the maximum and minimum travel ratings is exactly 1.
+
+# Given an integer array rating, return the length of the longest harmonious travel sequence among all its possible subsequences.
+
+# A subsequence of an array is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements.
+
+# You are provided with a partially implemented solution that contains bugs. Your task is to identify and fix the bugs to ensure the solution works correctly.
+
+def find_longest_harmonious_travel_sequence(ratings):
+    # Initialize a dictionary to store the frequency of each rating
+    frequency = {}
+
+    # Count the occurrences of each rating
+    for rating in ratings:
+        if rating in frequency:
+            frequency[rating] += 1 
+        else:
+            frequency[rating] = 1
+
+    max_length = 0
+
+    # Find the longest harmonious sequence
+    for rating in frequency:
+        if rating + 1 in frequency:
+            max_length = max(max_length, frequency[rating] + frequency[rating + 1])  
+
+    return max_length
+
+durations1 = [1, 3, 2, 2, 5, 2, 3, 7]
+durations2 = [1, 2, 3, 4]
+durations3 = [1, 1, 1, 1]
+durations4 = [1, 3, 2, 2, 5, 2, 3, 4, 6, 7, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9, 11]
+
+print(find_longest_harmonious_travel_sequence(durations1)) # 5
+print(find_longest_harmonious_travel_sequence(durations2)) # 2
+print(find_longest_harmonious_travel_sequence(durations3)) # 0
+print(find_longest_harmonious_travel_sequence(durations4)) # 10
