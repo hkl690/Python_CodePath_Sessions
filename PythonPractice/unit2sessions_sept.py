@@ -157,7 +157,7 @@ def count_endangered_species(endangered_species, observed_species):
 
 
 endangered_species1 = "aaaaaaaaA"
-observed_species1 = "aaaaaaaaaaaaaaaaAAbbbb"
+observed_species1 = "aAAbbbb"
 
 endangered_species2 = "z"
 observed_species2 = "ZZ"
