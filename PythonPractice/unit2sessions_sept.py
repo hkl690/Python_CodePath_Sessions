@@ -101,6 +101,111 @@ keys_within_range = [key for key, value in oxygen_levels.items() if min_val <= v
 
 print(keys_within_range)  # Output: ['Command Module', 'Habitation Module', 'Laboratory Module', 'Airlock']
 
+def most_endangered(species_list):
+    # make new dictionary of names to populations
+    # get min of values (populations), and return the corresponding name (key) from the dictionary
+
+    if not species_list:
+        return None  
+
+    min_population = float('inf')
+    endangered_species = None
+
+    for species in species_list:
+        if species['population'] < min_population:
+            min_population = species['population']
+            endangered_species = species['name']
+
+    return endangered_species
+
+species_list = [
+    {"name": "Amur Leopard",
+     "habitat": "Temperate forests",
+     "population": 10
+    },
+    {"name": "Javan Rhino",
+     "habitat": "Tropical forests",
+     "population": 10
+    },
+    {"name": "Vaquita",
+     "habitat": "Marine",
+     "population": 10
+    }
+]
+
+print(most_endangered(species_list))
+
+
+# Problem 2: Identifying Endangered Species
+# As part of conservation efforts, certain species are considered endangered and are represented by the string endangered_species. Each character in this string denotes a different endangered species. You also have a record of all observed species in a particular region, represented by the string observed_species. Each character in observed_species denotes a species observed in the region.
+
+# Your task is to determine how many of the observed species are also considered endangered.
+
+# Note: Species are case-sensitive, so "a" is considered a different species from "A".
+
+# Write a function to count the number of endangered species observed.
+
+def count_endangered_species(endangered_species, observed_species):
+    endangered_set = set(endangered_species)
+    count = 0
+
+    for species in observed_species:
+        if species in endangered_set:
+            count += 1
+
+    return count
+
+
+endangered_species1 = "aaaaaaaaA"
+observed_species1 = "aaaaaaaaaaaaaaaaAAbbbb"
+
+endangered_species2 = "z"
+observed_species2 = "ZZ"
+
+print(count_endangered_species(endangered_species1, observed_species1)) # 3
+print(count_endangered_species(endangered_species2, observed_species2)) # 0
+
+# Problem 3: Navigating the Research Station
+# In a wildlife research station, each letter of the alphabet represents a different observation point laid out in a single row. Given a string station_layout of length 26 indicating the layout of these observation points (indexed from 0 to 25), you start your journey at the first observation point (index 0). To make observations in a specific order represented by a string observations, you need to move from one point to another.
+
+# The time taken to move from one observation point to another is the absolute difference between their indices, |i - j|.
+
+# Write a function that returns the total time it takes to visit all the required observation points in the given order with one movement.
+def navigate_research_station(station_layout, observations):
+    station_index = {}
+    for index, char in enumerate(station_layout):
+        station_index[char] = index
+
+    current_index = 0
+    total_time = 0
+
+    for char in observations:
+        target_index = station_index[char]
+
+        # calculate the time to move to the target
+        total_time += abs(current_index - target_index)
+
+        # update the current_index to the target_index
+        current_index = target_index
+
+    return total_time
+
+station_layout1 = "pqrstuvwxyzabcdefghijklmno"
+observations1 = "wildlife"
+
+station_layout2 = "abcdefghijklmnopqrstuvwxyz"
+observations2 = "cba"
+
+print(navigate_research_station(station_layout1, observations1))  # 45
+print(navigate_research_station(station_layout2, observations2)) # 4
+# Example 2 explanation: The index moves from 0 to 2 to observe 'c', then to 1 for
+# 'b', then to 0 again for 'a'.
+# Total time = 2 + 1 + 1 = 4.
+
+
+
+
+
 cereals = ['cheerios', 'fruity pebbles', 'cocoa puffs']
 for count, cereal in enumerate(cereals, start=1):
   print(count, cereal)
