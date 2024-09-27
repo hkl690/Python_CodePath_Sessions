@@ -1,3 +1,106 @@
+# Problem 1: Festival Lineup
+# Given two lists of strings artists and set_times of length n, write a function lineup() 
+# that maps each artist to their set time.
+
+# An artist artists[i] has set time set_times[i]. Assume i <= 0 < n and len(artists) == len(set_times).
+
+# def lineup(artists, set_times):
+    # schedule = zip(artists, set_times)
+    # return dict(schedule)
+
+
+# artists1 = ["Kendrick Lamar", "Chappell Roan", "Mitski", "Rosalia"]
+# set_times1 = ["9:30 PM", "5:00 PM", "2:00 PM", "7:30 PM"]
+
+# artists2 = []
+# set_times2 = []
+
+# print(lineup(artists1, set_times1))
+# print(lineup(artists2, set_times2))
+
+# Example Output:
+# {"Kendrick Lamar": "9:30 PM", "Chappell Roan": "5:00 PM", "Mitski": "2:00 PM", "Rosalía": "7:30 PM"}
+# {}
+
+
+# Problem 2: Planning App
+# You are designing an app for your festival to help attendees have the best experience possible! 
+# As part of the application, users will be able to easily search their favorite artist and find out the day, 
+# time, and stage the artist is playing at. Write a function get_artist_info() that accepts a string artist 
+# and a dictionary festival_schedule mapping artist's names to dictionaries containing the day, time, 
+# and stage they are playing on. Return the dictionary containing the information about the given artist.
+
+# If the artist searched for does not exist in festival_schedule, 
+# return the dictionary {"message": "Artist not found"}.
+
+# def get_artist_info(artist, festival_schedule):
+    # not_found = {"message": "Artist not found"}
+    # if artist not in festival_schedule:
+        # return not_found
+    # else:
+        # return festival_schedule.get(artist)
+
+
+# festival_schedule = {
+    # "Blood Orange": {"day": "Friday", "time": "9:00 PM", "stage": "Main Stage"},
+    # "Metallica": {"day": "Saturday", "time": "8:00 PM", "stage": "Main Stage"},
+    # "Kali Uchis": {"day": "Sunday", "time": "7:00 PM", "stage": "Second Stage"},
+    # "Lawrence": {"day": "Friday", "time": "6:00 PM", "stage": "Main Stage"}
+# }
+
+# print(get_artist_info("Blood Orange", festival_schedule)) 
+# print(get_artist_info("Taylor Swift", festival_schedule))  
+# Example Output:
+# {'day': 'Friday', 'time': '9:00 PM', 'stage': 'Main Stage'}
+# {'message': 'Artist not found'}
+
+
+
+# Problem 3: Breathing Room
+# As part of your job as an astronaut, you need to perform routine safety checks. You are given a dictionary oxygen_levels which maps room names to current oxygen levels and two integers min_val and max_val specifying the acceptable range of oxygen levels. Return a list of room names whose values are outside the range defined by min_val and max_val (inclusive).
+# list comprehension with dictionary
+
+oxygen_levels = {"Command Module": 21, "Habitation Module": 20, "Laboratory Module": 19, "Airlock": 22, "Storage Bay": 18}
+min_val = 19 
+max_val = 22
+# Output: ['Storage Bay']
+keys_outside_range = [key for key, value in oxygen_levels.items() if value < min_val or value > max_val]
+print("Example Answer: ", keys_outside_range)
+
+def check_oxygen_levels(oxygen_levels, min_val, max_val):
+    if not min_val or not max_val or not oxygen_levels:
+        print("Please enter valid inputs")
+        # raise(Exception("Invalid input!"))
+        # raise ValueError()
+
+    result = []
+    for key, value in oxygen_levels.items():
+        if value < min_val or value > max_val:
+            result.append(key)
+    return result
+print("Method: ", check_oxygen_levels(oxygen_levels, min_val, max_val))
+oxygen_levels = {}
+min_val = 19 
+max_val = 22
+print("Method: ", check_oxygen_levels(oxygen_levels, min_val, max_val))
+
+
+oxygen_levels = {"Command Module": 21, "Habitation Module": 20, "Laboratory Module": 19, "Airlock": 22, "Storage Bay": 18}
+min_val = 19 
+max_val = 22
+# Output: ['Storage Bay']
+
+# or filter with lambda does the same thing
+# Find keys with values outside the specified range using filter and lambda
+keys_outside_range = list(filter(lambda key: oxygen_levels[key] < min_val or oxygen_levels[key] > max_val, oxygen_levels))
+
+print("Lambda: ", keys_outside_range)  # Output: ['Storage Bay']
+
+# Find keys with values within the specified range
+keys_within_range = [key for key, value in oxygen_levels.items() if min_val <= value <= max_val]
+
+print(keys_within_range)  # Output: ['Command Module', 'Habitation Module', 'Laboratory Module', 'Airlock']
+
 cereals = ['cheerios', 'fruity pebbles', 'cocoa puffs']
 for count, cereal in enumerate(cereals, start=1):
   print(count, cereal)
@@ -119,6 +222,9 @@ for num in numbers[::-1]:
     print(num)
     num -= 1  # Decrement the number by 1 each time    
     print("---")  # Separator to indicate moving to the next number
+
+
+
 
 # list comprehension with dictionary
 oxygen_levels = {"Command Module": 21, "Habitation Module": 20, "Laboratory Module": 19, "Airlock": 22, "Storage Bay": 18}
