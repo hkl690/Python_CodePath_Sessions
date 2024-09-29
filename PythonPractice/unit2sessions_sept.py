@@ -1,3 +1,7 @@
+from itertools import filterfalse
+import zipapp
+
+
 cereals = ['cheerios', 'fruity pebbles', 'cocoa puffs']
 for count, cereal in enumerate(cereals, start=1):
   print(count, cereal)
@@ -441,3 +445,251 @@ print(find_longest_harmonious_travel_sequence(durations2)) # 2
 print(find_longest_harmonious_travel_sequence(durations3)) # 0
 print(find_longest_harmonious_travel_sequence(durations4)) # 10
 
+# Assessment Standard B #4
+students = ["Samarth", "Nicholas", "Lexie", "Theresa"]
+next_id = 12348
+directory = {12345: "Samarth", 12346: "Nicholas", 12347: "Kenyele"}
+for student in students:
+    if student not in directory.values():
+        directory[next_id] = student
+        next_id += 1
+
+print(directory[12348])
+
+#6
+princess_movies = {"Snow White": 1937, "The Princess and the Frog": 2009, "Moana": 2016}
+print(princess_movies.values())
+
+#7
+def mystery_function(word):
+    result = {}
+    for letter in word:
+        if letter in result:
+            result[letter] += 1
+        else:
+            result[letter] = 1
+    return result
+
+word = "banana"
+result = mystery_function(word)
+print(result)
+
+#5 find the bug
+
+def count_words(sentence):
+    words = sentence.split()
+    word_count = {}
+    for word in words:
+        if word in word_count:
+            word_count[word] += 1
+        else:
+            word_count[word] = 1
+    return word_count
+
+sentence = "The quick brown brown brown fox fox"
+print(count_words(sentence))
+
+# 1 Contains duplicates - Given an int array nums, return True if any value appears
+# at least twice in the array, and return False if every element is distinct
+
+def contains_duplicates(nums):
+    seen = set()
+    for num in nums:
+        if num in seen:
+            return True
+        else:
+            seen.add(num)
+    return False
+
+nums = [1,2,3,1] # True
+print(contains_duplicates(nums))
+
+nums = [1,2,3,4] # False
+print(contains_duplicates(nums))
+
+
+# 2 Two Sum - Given an array of int nums and an int target, return indices of the two numbers
+# such that they add up to target. You may assume that each input would have exactly one 
+# solution, and you may not use the same element twice. Return the answer in ascending order 
+# (i.e. sorted from least to greatest).
+
+def two_sum(nums, target):
+    seen = {}
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return sorted([seen[complement], i])
+        seen[num] = i
+
+nums = [2, 7, 11, 15]
+target = 9 # output [0, 1] because nums[0] + nums[1] == 9
+print(two_sum(nums, 9))
+
+nums = [3,2,4]
+target = 6 # output [1,2]
+print(two_sum(nums, 6))
+
+nums = [3,3]
+target = 6 # output [0,1]
+print(two_sum(nums, 6))
+
+# 3 Isomorphic Strings - given two strings s and t, determine if they are isomorphic.
+# Two strings are isomorphic if the characters in s can be replaced to get t.
+# All occurrences of a character must be replaced with another character while
+# preserving the order of characters. No two characters may map to the same
+# character, but a character may map to itself.
+
+def is_isomorphic(s, t):
+    if len(s) != len(t):
+        return False
+
+    iso_map = {}
+    mapped_values = set()
+    zipped_values = zip(s,t)
+
+    for char_s, char_t in zipped_values:
+        if char_s in iso_map:
+            if iso_map[char_s] != char_t:
+                return False
+        else:
+            if char_t in mapped_values:
+                return False
+            iso_map[char_s] = char_t
+            mapped_values.add(char_t)
+
+    return True    
+
+s = "egg"
+t = "add"
+print(is_isomorphic(s, t)) # True
+
+s = "too" 
+t = "sar"
+print(is_isomorphic(s, t)) # False
+
+s = "paper" 
+t = "title"
+print(is_isomorphic(s, t)) # True
+
+# Assessment Unit 2 Advanced A
+# 4
+student = {"name": "Emma", "class": 9, "grade": 'A'}
+student.pop("grade")
+print(student.items())
+
+# 5
+gradebook = {"class": {"student":{"name":"Mike", "grade":{"physics":'C', "history": 'B'}}}}
+print(gradebook['class']['student']['grade']['history'])
+
+# 6
+def process_data(names, scores):
+    result = {}
+    for i in range(len(names)):
+        name = names[i]
+        score = scores[i]
+        if name not in result:
+            result[name] = []
+        result[name].append(score)
+    return result
+
+names = ["Alice", "Bob", "Alice", "Bob", "Charlie"]
+scores = [85, 90, 95, 80, 70]
+result = process_data(names, scores)
+print(result)
+
+#7 find the bug
+def filter_below_threshold(dict1, threshold):
+    filtered_dict = {}
+    for key, value in dict1.items():
+        if value < threshold:
+            filtered_dict[key] = value
+    return filtered_dict
+
+names = ["Alice", "Bob", "Alice", "Bob", "Charlie"]
+scores = [85, 90, 95, 80, 70]
+dict1 = dict(zip(names, scores))
+print(filter_below_threshold(dict1,85))
+
+# Test the function
+sample_dict = {'a': 10, 'b': 5, 'c': 15, 'd': 3}
+threshold = 10
+result = filter_below_threshold(sample_dict, threshold)
+print(result)  # Output should be {'b': 5, 'd': 3}
+
+# 1 Array Intersection 2 - given two int arrays nums1 and nums2, return
+# an array of their intersection. your answer should be returned in
+# ascending order
+def intersect(nums1, nums2):
+    from collections import Counter
+    count1 = Counter(nums1)
+    count2 = Counter(nums2)
+
+    intersection = []
+    for num in count1:
+        if num in count2:
+            intersection.extend([num] * min(count1[num], count2[num]))
+
+    return sorted(intersection)
+
+nums1 = [1,2,2,1]
+nums2 = [2,2] # [2,2]
+print(intersect(nums1, nums2))
+
+nums1 = [4,9,5]
+nums2 = [9,4,9,8,4] # [4,9]
+print(intersect(nums1, nums2))
+
+#2 Word Pattern - given a pattern and a string s, return True if s follows
+# the same pattern and False otherwise. 
+def word_pattern(pattern, s):
+    words = s.split()    
+    if len(pattern) != len(words):
+        return False
+
+    pattern_to_word = {}
+    word_to_pattern = {}
+
+    for p, w in zip(pattern, words):
+        if p in pattern_to_word:
+            if pattern_to_word[p] != w:
+                return False
+        else:
+            if w in word_to_pattern:
+                return False
+            pattern_to_word[p] = w
+            word_to_pattern[w] = p
+        
+    return True
+
+pattern = "abba"
+s = "dog cat cat dog"
+print(word_pattern(pattern, s)) # True
+
+pattern = "abba"
+s = "dog cat cat fish"
+print(word_pattern(pattern, s)) # False
+
+# 3 Grouped Anagrams - given a list of strings strs, group the anagrams together.
+# You can return the answer in any order.
+
+def grouped_anagrams(strs):
+    if len(strs) == 0:
+        return strs
+    anagrams = {}
+
+    for word in strs:
+        sorted_word = ''.join(sorted(word))
+        if sorted_word in anagrams:
+            anagrams[sorted_word].append(word)
+        else:
+            anagrams[sorted_word] = [word]
+    return list(anagrams.values())
+
+strs = ["eat","tea","tan","ate","nat","bat"]
+print(grouped_anagrams(strs)) 
+
+strs = ["a"]
+print(grouped_anagrams(strs)) 
+
+strs = [""]
+print(grouped_anagrams(strs)) 
