@@ -1,5 +1,209 @@
-from itertools import filterfalse
-import zipapp
+# Problem 1: Festival Lineup
+# Given two lists of strings artists and set_times of length n, write a function lineup() 
+# that maps each artist to their set time.
+
+# An artist artists[i] has set time set_times[i]. Assume i <= 0 < n and len(artists) == len(set_times).
+
+# def lineup(artists, set_times):
+    # schedule = zip(artists, set_times)
+    # return dict(schedule)
+
+
+# artists1 = ["Kendrick Lamar", "Chappell Roan", "Mitski", "Rosalia"]
+# set_times1 = ["9:30 PM", "5:00 PM", "2:00 PM", "7:30 PM"]
+
+# artists2 = []
+# set_times2 = []
+
+# print(lineup(artists1, set_times1))
+# print(lineup(artists2, set_times2))
+
+# Example Output:
+# {"Kendrick Lamar": "9:30 PM", "Chappell Roan": "5:00 PM", "Mitski": "2:00 PM", "Rosalía": "7:30 PM"}
+# {}
+
+
+# Problem 2: Planning App
+# You are designing an app for your festival to help attendees have the best experience possible! 
+# As part of the application, users will be able to easily search their favorite artist and find out the day, 
+# time, and stage the artist is playing at. Write a function get_artist_info() that accepts a string artist 
+# and a dictionary festival_schedule mapping artist's names to dictionaries containing the day, time, 
+# and stage they are playing on. Return the dictionary containing the information about the given artist.
+
+# If the artist searched for does not exist in festival_schedule, 
+# return the dictionary {"message": "Artist not found"}.
+
+# def get_artist_info(artist, festival_schedule):
+    # not_found = {"message": "Artist not found"}
+    # if artist not in festival_schedule:
+        # return not_found
+    # else:
+        # return festival_schedule.get(artist)
+
+
+# festival_schedule = {
+    # "Blood Orange": {"day": "Friday", "time": "9:00 PM", "stage": "Main Stage"},
+    # "Metallica": {"day": "Saturday", "time": "8:00 PM", "stage": "Main Stage"},
+    # "Kali Uchis": {"day": "Sunday", "time": "7:00 PM", "stage": "Second Stage"},
+    # "Lawrence": {"day": "Friday", "time": "6:00 PM", "stage": "Main Stage"}
+# }
+
+# print(get_artist_info("Blood Orange", festival_schedule)) 
+# print(get_artist_info("Taylor Swift", festival_schedule))  
+# Example Output:
+# {'day': 'Friday', 'time': '9:00 PM', 'stage': 'Main Stage'}
+# {'message': 'Artist not found'}
+
+
+
+# Problem 3: Breathing Room
+# As part of your job as an astronaut, you need to perform routine safety checks. You are given a dictionary oxygen_levels which maps room names to current oxygen levels and two integers min_val and max_val specifying the acceptable range of oxygen levels. Return a list of room names whose values are outside the range defined by min_val and max_val (inclusive).
+# list comprehension with dictionary
+
+oxygen_levels = {"Command Module": 21, "Habitation Module": 20, "Laboratory Module": 19, "Airlock": 22, "Storage Bay": 18}
+min_val = 19 
+max_val = 22
+# Output: ['Storage Bay']
+keys_outside_range = [key for key, value in oxygen_levels.items() if value < min_val or value > max_val]
+print("Example Answer: ", keys_outside_range)
+
+def check_oxygen_levels(oxygen_levels, min_val, max_val):
+    if not min_val or not max_val or not oxygen_levels:
+        print("Please enter valid inputs")
+        # raise(Exception("Invalid input!"))
+        # raise ValueError()
+
+    result = []
+    for key, value in oxygen_levels.items():
+        if value < min_val or value > max_val:
+            result.append(key)
+    return result
+print("Method: ", check_oxygen_levels(oxygen_levels, min_val, max_val))
+oxygen_levels = {}
+min_val = 19 
+max_val = 22
+print("Method: ", check_oxygen_levels(oxygen_levels, min_val, max_val))
+
+
+oxygen_levels = {"Command Module": 21, "Habitation Module": 20, "Laboratory Module": 19, "Airlock": 22, "Storage Bay": 18}
+min_val = 19 
+max_val = 22
+# Output: ['Storage Bay']
+
+# or filter with lambda does the same thing
+# Find keys with values outside the specified range using filter and lambda
+keys_outside_range = list(filter(lambda key: oxygen_levels[key] < min_val or oxygen_levels[key] > max_val, oxygen_levels))
+
+print("Lambda: ", keys_outside_range)  # Output: ['Storage Bay']
+
+# Find keys with values within the specified range
+keys_within_range = [key for key, value in oxygen_levels.items() if min_val <= value <= max_val]
+
+print(keys_within_range)  # Output: ['Command Module', 'Habitation Module', 'Laboratory Module', 'Airlock']
+
+def most_endangered(species_list):
+    # make new dictionary of names to populations
+    # get min of values (populations), and return the corresponding name (key) from the dictionary
+
+    if not species_list:
+        return None  
+
+    min_population = float('inf')
+    endangered_species = None
+
+    for species in species_list:
+        if species['population'] < min_population:
+            min_population = species['population']
+            endangered_species = species['name']
+
+    return endangered_species
+
+species_list = [
+    {"name": "Amur Leopard",
+     "habitat": "Temperate forests",
+     "population": 10
+    },
+    {"name": "Javan Rhino",
+     "habitat": "Tropical forests",
+     "population": 10
+    },
+    {"name": "Vaquita",
+     "habitat": "Marine",
+     "population": 10
+    }
+]
+
+print(most_endangered(species_list))
+
+
+# Problem 2: Identifying Endangered Species
+# As part of conservation efforts, certain species are considered endangered and are represented by the string endangered_species. Each character in this string denotes a different endangered species. You also have a record of all observed species in a particular region, represented by the string observed_species. Each character in observed_species denotes a species observed in the region.
+
+# Your task is to determine how many of the observed species are also considered endangered.
+
+# Note: Species are case-sensitive, so "a" is considered a different species from "A".
+
+# Write a function to count the number of endangered species observed.
+
+def count_endangered_species(endangered_species, observed_species):
+    endangered_set = set(endangered_species)
+    count = 0
+
+    for species in observed_species:
+        if species in endangered_set:
+            count += 1
+
+    return count
+
+
+endangered_species1 = "aaaaaaaaA"
+observed_species1 = "aAAbbbb"
+
+endangered_species2 = "z"
+observed_species2 = "ZZ"
+
+print(count_endangered_species(endangered_species1, observed_species1)) # 3
+print(count_endangered_species(endangered_species2, observed_species2)) # 0
+
+# Problem 3: Navigating the Research Station
+# In a wildlife research station, each letter of the alphabet represents a different observation point laid out in a single row. Given a string station_layout of length 26 indicating the layout of these observation points (indexed from 0 to 25), you start your journey at the first observation point (index 0). To make observations in a specific order represented by a string observations, you need to move from one point to another.
+
+# The time taken to move from one observation point to another is the absolute difference between their indices, |i - j|.
+
+# Write a function that returns the total time it takes to visit all the required observation points in the given order with one movement.
+def navigate_research_station(station_layout, observations):
+    station_index = {}
+    for index, char in enumerate(station_layout):
+        station_index[char] = index
+
+    current_index = 0
+    total_time = 0
+
+    for char in observations:
+        target_index = station_index[char]
+
+        # calculate the time to move to the target
+        total_time += abs(current_index - target_index)
+
+        # update the current_index to the target_index
+        current_index = target_index
+
+    return total_time
+
+station_layout1 = "pqrstuvwxyzabcdefghijklmno"
+observations1 = "wildlife"
+
+station_layout2 = "abcdefghijklmnopqrstuvwxyz"
+observations2 = "cba"
+
+print(navigate_research_station(station_layout1, observations1))  # 45
+print(navigate_research_station(station_layout2, observations2)) # 4
+# Example 2 explanation: The index moves from 0 to 2 to observe 'c', then to 1 for
+# 'b', then to 0 again for 'a'.
+# Total time = 2 + 1 + 1 = 4.
+
+
+
 
 
 cereals = ['cheerios', 'fruity pebbles', 'cocoa puffs']
@@ -123,6 +327,9 @@ for num in numbers[::-1]:
     print(num)
     num -= 1  # Decrement the number by 1 each time    
     print("---")  # Separator to indicate moving to the next number
+
+
+
 
 # list comprehension with dictionary
 oxygen_levels = {"Command Module": 21, "Habitation Module": 20, "Laboratory Module": 19, "Airlock": 22, "Storage Bay": 18}
