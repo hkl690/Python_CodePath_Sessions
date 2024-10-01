@@ -60,6 +60,9 @@
 # As part of your job as an astronaut, you need to perform routine safety checks. You are given a dictionary oxygen_levels which maps room names to current oxygen levels and two integers min_val and max_val specifying the acceptable range of oxygen levels. Return a list of room names whose values are outside the range defined by min_val and max_val (inclusive).
 # list comprehension with dictionary
 
+import enum
+
+
 oxygen_levels = {"Command Module": 21, "Habitation Module": 20, "Laboratory Module": 19, "Airlock": 22, "Storage Bay": 18}
 min_val = 19 
 max_val = 22
@@ -900,3 +903,113 @@ print(grouped_anagrams(strs))
 
 strs = [""]
 print(grouped_anagrams(strs)) 
+
+
+# Unit 2 Advanced B
+# 5
+friends = {1:{'name': 'Rachel', 'age': '27', 'job': 'Designer'}, 3:{'name': 'Ross', 'age': '277', 'job': 'Designeeeeer'}}
+
+print(friends[3]['job'])
+
+# 6
+numbers = [1,2,3,4,5]
+squared = {num: num ** 2 for num in numbers}
+print(squared)
+
+# 7
+def mystery_function(words):
+    result = {}
+    for word in words:
+        initial = word[0]
+        if initial not in result:
+            result[initial] = []
+        result[initial].append(word)
+    return result
+
+words = ["apple", "banana", "cherry", "apricot", "blueberry", "avocado"]
+result = mystery_function(words)
+print(result)
+
+# 4 debug
+# merge_dicts should accept two dictionaries dict1 and dict2 and merge them into a new dictionary.
+# If the same key is in both dictionaries, the value from dict2 should overwrite the value from dict1
+
+def merge_dicts(dict1, dict2):
+    merged = dict1.copy()
+    for key, value in dict2.items():
+        merged[key] = value
+    return merged
+
+princess_movies = {"Snow White": 1937, "The Princess and the Frog": 2009, "Moana": 2016}
+princess_movies2 = {"Snow White": 2222, "The Princess and the Frog": 2555}
+print(merge_dicts(princess_movies, princess_movies2))
+
+# does the exact same
+def merge_dicts(dict1, dict2):
+    merged = dict1.copy()  # Create a copy of dict1 to avoid modifying the original dictionary
+    merged.update(dict2)   # Update the copy with dict2
+    return merged
+
+# Example usage
+princess_movies = {"Snow White": 1937, "The Princess and the Frog": 2009, "Moana": 2016}
+princess_movies2 = {"Snow White": 2222, "The Princess and the Frog": 2555}
+print(merge_dicts(princess_movies, princess_movies2))
+
+# 2 Rank Transform an Array
+# given an int array, replace each element with its rank. Ranks starts from 1, if two elements
+# are equal, give them the same rank.
+
+def array_rank_transform(arr):
+    # create a list of tuples (value, index)
+    indexed_arr = [(value, index) for index, value in enumerate(arr)]
+
+    # sort the list based on values
+    sorted_arr = sorted(indexed_arr)
+
+    # create a list to store the ranks
+    ranks = [0] * len(arr)
+
+    # assign ranks based on sorted order
+    current_rank = 1
+    for i in range(len(sorted_arr)):
+        if i > 0 and sorted_arr[i][0] != sorted_arr[i-1][0]:
+            current_rank += 1
+        ranks[sorted_arr[i][1]] = current_rank
+
+    return ranks
+
+arr = [37,12,28,9,100,56,80,5,12]
+print(array_rank_transform(arr)) # output [5,3,4,2,8,6,7,1,3]
+
+arr = [40,10,20,30]
+print(array_rank_transform(arr)) # [4,1,2,3]
+
+arr = [100,100,100]
+print(array_rank_transform(arr)) # [1,1,1]
+
+# 3 Longest Substring Without Repeating Characters
+# Given a string s, return the length of the longest substring without repeating characters
+
+def length_of_longest_substring(s):
+    max_length= 0
+    char_set = set()
+    left = 0
+
+    for right in range(len(s)):
+        while s[right] in char_set:
+            char_set.remove(s[left])
+            left += 1
+        char_set.add(s[right])
+        max_length = max(max_length, right - left + 1)
+
+    return max_length
+
+s = "abcabcbb"
+print(length_of_longest_substring(s)) # output 3
+
+s = "bbbb"
+print(length_of_longest_substring(s)) # 1
+
+s = "pwwkew"
+print(length_of_longest_substring(s)) # 3 "wke" length 3. Notice the answer must be a substring, "pwke" is 
+# a subsequence, not a substring
