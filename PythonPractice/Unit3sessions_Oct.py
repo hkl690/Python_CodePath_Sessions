@@ -28,7 +28,9 @@ chars = ['A', 'b', 'c', 'D', 'E', 'f']
 print(process_strings(chars))
 
 from collections import deque
+from hmac import new
 from operator import is_
+from os import remove
 
 def process_numbers(nums):
     queue = deque([10, 20, 30])
@@ -142,3 +144,154 @@ s = "likeleetcode"
 print(first_non_repeating_character(s)) # 1
 s = "aabb"
 print(first_non_repeating_character(s)) # -1
+
+
+# import sys
+
+# my_list = []
+# print(sys.getsizeof(my_list))  # Initial size
+
+# # Adding elements to the list
+# for i in range(20):
+#     my_list.append(i)
+#     print(f"Length: {len(my_list)}, Size in bytes: {sys.getsizeof(my_list)}")
+
+
+# 4
+def mystery(nums):
+    left = 0
+    right = 0
+
+    while right < len(nums):
+        if nums[right] != 0:
+            temp = nums[right]
+            nums[right] = nums[left]
+            nums[left] = temp
+            left += 1
+        right += 1
+    return nums
+
+nums = [0,0,1,2,0,3]
+print(mystery(nums))
+
+def process_numbers(nums):
+    stack = [1]
+    for num in nums:
+        if num%2 == 0:
+            stack.append(num)
+        elif len(stack) > 0 and num % 2 != 0:
+            stack.pop()
+    return stack
+
+nums = [2,3,4,5,6,7]
+print(process_numbers(nums))
+
+# 6
+def process_strings(chars):
+    queue = deque(["start", "middle", "end"])
+    for char in chars:
+        if char.isupper():
+            queue.append(char)
+        elif len(queue) > 0 and char.islower():
+            queue.popleft()
+    return list(queue)
+
+chars = ['A', 'b', 'C', 'd', 'E', 'f']
+print(process_strings(chars))
+
+# 7 debug
+def check_balanced(s):
+    stack = []
+    matching_parentheses = {')': '(', '}': '{', ']': '['}
+    
+    for char in s:
+        if char in matching_parentheses.values():
+            stack.append(char)
+        elif char in matching_parentheses:
+            if stack and stack[-1] == matching_parentheses[char]:
+                stack.pop()
+            else:
+                return False
+        else:
+            return False
+                
+    return not stack
+s1 = "()"
+s2 = "()[]{}"
+s3 = "(]"
+print(check_balanced(s1)) # True
+print(check_balanced(s2)) # True
+print(check_balanced(s3)) # False
+
+def remove_duplicates(nums):
+    if not nums:
+        return 0
+
+    j = 0
+
+    for i in range(1, len(nums)):
+        if nums[i] != nums[j]:
+            j += 1
+            nums[j] = nums[i]
+                 
+    # print(nums)
+    return j + 1              
+
+print(remove_duplicates([1,1,2,3]))
+
+# 2 Intersection of Two Arrays (Two Pointer)
+def intersection(nums1, nums2):
+    if not nums1 or not nums2:
+        return []
+
+    result = []
+    p1 = 0
+    p2 = 0
+    nums1.sort()
+    nums2.sort()
+
+    while p1 < len(nums1) and p2 < len(nums2):
+        if nums1[p1] == nums2[p2]:
+            if not result or result[-1] != nums1[p1]: # avoid duplicates
+                result.append(nums1[p1])
+            p1 += 1
+            p2 += 1
+        elif nums1[p1] < nums2[p2]:
+            p1 += 1
+        else:
+            p2 += 1
+
+    return result
+
+nums1 = [1, 2, 2, 3]
+nums2 = [2, 2, 3, 4]
+print(intersection(nums1, nums2))  # Output: [2, 3]
+
+# 3 Number of students unable to eat lunch (stacks, queues)
+# circular sandwich = 0, square sandwich = 1
+# sandwiches are placed in a stack. if the student at the front of the queue prefers
+# the sandwich on top of the stack, they will take it and leave the queue. Otherwise
+# they will leave it and go to the queue's end.This continues until none of the queue
+# students want to take the top sandwich and are thus unable to eat. Return the number
+# of students that are unable to eat.
+def count_students_unable_to_eat(students, sandwiches):
+    count_students_in_queue = 0
+    queue = deque(students)
+    stack = sandwiches
+
+    while queue and count_students_in_queue < len(queue):
+        if queue[0] == stack[0]:
+            queue.popleft()
+            stack.pop(0)
+            count_students_in_queue = 0 # resetting
+        else:
+            queue.append(queue.popleft())
+            count_students_in_queue += 1
+    return count_students_in_queue
+
+students = [1, 1, 0, 0]
+sandwiches = [0, 1, 0, 1]
+print(count_students_unable_to_eat(students, sandwiches))  # Output: 0
+students = [1, 1, 0, 0, 1]
+sandwiches = [0, 1, 0, 1, 0]
+print(count_students_unable_to_eat(students, sandwiches))  # Output: 1
