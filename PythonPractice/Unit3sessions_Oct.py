@@ -377,3 +377,56 @@ print(check_balanced("(){}[]"))  # True
 print(check_balanced("([{}])"))  # True
 print(check_balanced("(]"))      # False
 print(check_balanced("({[)]"))   # False
+
+# 2 kth largest element in array, solve without sorting
+def find_kth_largest(nums, k):
+    min_heap = []
+
+    for num in nums:
+        heapq.heappush(min_heap, num)
+        if len(min_heap) > k:
+            heapq.heappop(min_heap)
+
+    return min_heap[0]
+
+nums = [3,2,1,5,6,4]
+k = 2 # output 5 because 5 is the 2nd largest element
+print(find_kth_largest(nums, k))
+nums = [3,2,3,1,2,4,5,5,6]
+k = 4 # output 4 is the 4th largest element since duplicates are counted
+print(find_kth_largest(nums, k))
+
+# 3 Longest subarray with absolute difference less than or equal to limit
+# Given an array of integers "nums" and an integer "limit", return the size
+# of the longest non-empty subarray such that the absolute difference 
+# between any two elements of this subarray is less than or equal to "limit".
+
+def longest_subarray(nums, limit):
+    max_deque = deque()
+    min_deque = deque()
+    left = 0
+    result = 0
+
+    for right in range(len(nums)):
+        while max_deque and nums[max_deque[-1]] <= nums[right]:
+            max_deque.pop()
+        while min_deque and nums[min_deque[-1]]>= nums[right]:
+            min_deque.pop()
+
+        max_deque.append(right)
+        min_deque.append(right)
+
+        while nums[max_deque[0]] - nums[min_deque[0]] > limit:
+            left += 1
+            if max_deque[0] < left:
+                max_deque.popleft()
+            if min_deque[0] < left:
+                min_deque.popleft()
+
+        result = max(result, right - left + 1)
+
+    return result
+
+print(longest_subarray([8, 2, 4, 7], 4))  # Output: 2
+print(longest_subarray([10, 1, 2, 4, 7, 2], 5))  # Output: 4
+print(longest_subarray([4, 2, 2, 2, 4, 4, 2, 2], 0))  # Output: 3
