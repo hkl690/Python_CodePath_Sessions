@@ -28,6 +28,7 @@ chars = ['A', 'b', 'c', 'D', 'E', 'f']
 print(process_strings(chars))
 
 from collections import deque
+import enum
 from hmac import new
 from operator import is_
 from os import remove
@@ -295,3 +296,84 @@ print(count_students_unable_to_eat(students, sandwiches))  # Output: 0
 students = [1, 1, 0, 0, 1]
 sandwiches = [0, 1, 0, 1, 0]
 print(count_students_unable_to_eat(students, sandwiches))  # Output: 1
+
+# 4
+def process_elements(elements):
+    queue = deque()
+    stack = []
+
+    for element in elements:
+        queue.append(element)
+
+    while queue:
+        item = queue.popleft()
+        stack.append(item)
+
+        if len(stack) % 2 == 0 and queue:
+            stack.pop()
+    return list(stack)
+
+result = process_elements([1,2,3,4,5])
+print("result is ",result)
+
+# 5
+import heapq
+def mystery_function(lists):
+    min_heap = []
+    for i, lst in enumerate(lists):
+        if lst:
+            heapq.heappush(min_heap, (lst[0], i, 0))
+
+    result_list = []
+
+    # extract-min and push the next element from the same list
+    while min_heap:
+        value, list_idx, element_idx = heapq.heappop(min_heap)
+        result_list.append(value)
+        next_idx = element_idx + 1
+        if next_idx < len(lists[list_idx]):
+            heapq.heappush(min_heap, (lists[list_idx][next_idx], list_idx, next_idx))
+
+    return result_list
+
+print("5: ",mystery_function([[1,3],[2,4]]))
+
+# 6
+def mystery(nums):
+    if not nums:
+        return 0
+
+    left = 0
+
+    for right in range(1, len(nums)):
+        if nums[right] != nums[left]:
+            left += 1
+            nums[left] = nums[right]
+
+    return left + 1
+
+print("6: ",mystery([1,1,2,2,2,3,4,4,5]))
+
+# 7
+def check_balanced(s):
+    stack = []
+    matching_parenthesis = {')': '(', '}': '{', ']':'['}
+
+    for char in s:
+        if char in matching_parenthesis.values():
+            stack.append(char)
+            
+        elif char in matching_parenthesis.keys():
+            if not stack or stack[-1] != matching_parenthesis[char]:
+                return False
+            stack.pop()
+
+    return not stack
+
+print(check_balanced('{([])}'))
+print(check_balanced('])}{(['))
+print(check_balanced('])}'))
+print(check_balanced("(){}[]"))  # True
+print(check_balanced("([{}])"))  # True
+print(check_balanced("(]"))      # False
+print(check_balanced("({[)]"))   # False
