@@ -430,3 +430,143 @@ def longest_subarray(nums, limit):
 print(longest_subarray([8, 2, 4, 7], 4))  # Output: 2
 print(longest_subarray([10, 1, 2, 4, 7, 2], 5))  # Output: 4
 print(longest_subarray([4, 2, 2, 2, 4, 4, 2, 2], 0))  # Output: 3
+
+# Unit 3 Advanced B
+
+# 4
+
+def process_chars(elements):
+    queue = deque()
+    stack = []
+
+    for element in elements:
+        queue.append(element)
+
+    while queue:
+        item = queue.popleft()
+        stack.append(item)
+
+        if len(stack)  % 2 == 0 and queue:
+            stack.pop()
+
+    return list(stack)
+
+print(process_chars(["a","b","c","d","e"]))
+        
+# 5
+def mystery(nums, k):
+    min_heap = nums[:k]
+    heapq.heapify(min_heap)
+
+    for num in nums[k:]:
+        if num > min_heap[0]:
+            heapq.heapreplace(min_heap, num)
+
+    return min_heap[0]
+
+print(mystery([3,2,1,5,6,4],2))
+
+# 6
+def mystery_function(height):
+    left = 0
+    right = len(height) - 1
+    max_water = 0
+
+    while left < right:
+        width = right - left
+        max_water = max(max_water, min(height[left], height[right]) * width)
+
+        if height[left] < height[right]:
+            left += 1
+        else:
+            right -= 1
+
+    return max_water
+
+print(mystery_function([1,8,6,2,5,4,8,3,7])) # 49
+
+# 7
+def first_uniq_char(s):
+    char_count = {}
+    queue = deque()
+
+    for i, char in enumerate(s):
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
+            queue.append(i)
+
+    while queue:
+        index = queue.popleft()
+        if char_count[s[index]] == 1:
+            return index
+    return -1
+
+# 1 return vowels of a string. Vowels are 'a', 'e', 'i', 'o', 'u' and can be both upper and lower cases, more than once
+
+def reverse_vowels(s):
+    
+    vowels_set = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', "U"}
+    s_vowels = [char for char in s if char in vowels_set]
+    result = []
+
+    for char in s:
+        if char in vowels_set:
+            result.append(s_vowels.pop())
+        else:
+            result.append(char)
+
+    return ''.join(result)
+
+s = "hello"
+print(reverse_vowels(s)) # "holle"
+
+s = "codepath"
+print(reverse_vowels(s)) # "cadepoth"
+
+# 2 reverse polish notation
+def evalRPN(tokens):
+    operator_set = {'+', '-', '*', '/'}
+    stack = []
+
+    for token in tokens:
+        if token not in operator_set:
+            stack.append(int(token))
+        else:
+            b = stack.pop()
+            a = stack.pop()
+            if token == '+':
+                stack.append(a + b)
+            elif token == '-':
+                stack.append(a - b)
+            elif token == '*':
+                stack.append(a * b)
+            elif token == '/':
+                stack.append(int(a/b))
+
+    return stack[0]
+
+tokens = ["2", "1", "+", "3", "*"] # output 9 because ((2 + 1) * 3 = 9)
+print(evalRPN(tokens))
+tokens = ["4", "13", "5", "/", "+"] # 6 because (4 + (13/5)) = 6
+print(evalRPN(tokens))
+
+# 3 kth smallest element in a matrix
+# use a heap
+def kthSmallest(matrix, k):
+    flat_list = [element for row in matrix for element in row]
+
+    heapq.heapify(flat_list)
+
+    for _ in range(k-1):
+        heapq.heappop(flat_list)
+
+    return heapq.heappop(flat_list)
+
+matrix = [[1,5,9],[10,11,13],[12,13,15]]
+k = 8 # output 13 because the elements in the matrix are [1,5,9,10,11,12,13,13,15], and the 8th smallest is 13
+print(kthSmallest(matrix, k))
+matrix = [[-5]]
+k = 1 # output -5
+print(kthSmallest(matrix, k))
