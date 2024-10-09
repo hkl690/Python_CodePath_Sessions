@@ -91,4 +91,3 @@ nft_collection_3 = [
 print(identify_popular_creators(nft_collection))
 print(identify_popular_creators(nft_collection_2))
 print(identify_popular_creators(nft_collection_3)) # empty
-
