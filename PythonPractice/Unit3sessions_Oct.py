@@ -28,6 +28,7 @@ chars = ['A', 'b', 'c', 'D', 'E', 'f']
 print(process_strings(chars))
 
 from collections import deque
+import enum
 from hmac import new
 from operator import is_
 from os import remove
@@ -295,3 +296,137 @@ print(count_students_unable_to_eat(students, sandwiches))  # Output: 0
 students = [1, 1, 0, 0, 1]
 sandwiches = [0, 1, 0, 1, 0]
 print(count_students_unable_to_eat(students, sandwiches))  # Output: 1
+
+# 4
+def process_elements(elements):
+    queue = deque()
+    stack = []
+
+    for element in elements:
+        queue.append(element)
+
+    while queue:
+        item = queue.popleft()
+        stack.append(item)
+
+        if len(stack) % 2 == 0 and queue:
+            stack.pop()
+    return list(stack)
+
+result = process_elements([1,2,3,4,5])
+print("result is ",result)
+
+# 5
+import heapq
+def mystery_function(lists):
+    min_heap = []
+    for i, lst in enumerate(lists):
+        if lst:
+            heapq.heappush(min_heap, (lst[0], i, 0))
+
+    result_list = []
+
+    # extract-min and push the next element from the same list
+    while min_heap:
+        value, list_idx, element_idx = heapq.heappop(min_heap)
+        result_list.append(value)
+        next_idx = element_idx + 1
+        if next_idx < len(lists[list_idx]):
+            heapq.heappush(min_heap, (lists[list_idx][next_idx], list_idx, next_idx))
+
+    return result_list
+
+print("5: ",mystery_function([[1,3],[2,4]]))
+
+# 6
+def mystery(nums):
+    if not nums:
+        return 0
+
+    left = 0
+
+    for right in range(1, len(nums)):
+        if nums[right] != nums[left]:
+            left += 1
+            nums[left] = nums[right]
+
+    return left + 1
+
+print("6: ",mystery([1,1,2,2,2,3,4,4,5]))
+
+# 7
+def check_balanced(s):
+    stack = []
+    matching_parenthesis = {')': '(', '}': '{', ']':'['}
+
+    for char in s:
+        if char in matching_parenthesis.values():
+            stack.append(char)
+            
+        elif char in matching_parenthesis.keys():
+            if not stack or stack[-1] != matching_parenthesis[char]:
+                return False
+            stack.pop()
+
+    return not stack
+
+print(check_balanced('{([])}'))
+print(check_balanced('])}{(['))
+print(check_balanced('])}'))
+print(check_balanced("(){}[]"))  # True
+print(check_balanced("([{}])"))  # True
+print(check_balanced("(]"))      # False
+print(check_balanced("({[)]"))   # False
+
+# 2 kth largest element in array, solve without sorting
+def find_kth_largest(nums, k):
+    min_heap = []
+
+    for num in nums:
+        heapq.heappush(min_heap, num)
+        if len(min_heap) > k:
+            heapq.heappop(min_heap)
+
+    return min_heap[0]
+
+nums = [3,2,1,5,6,4]
+k = 2 # output 5 because 5 is the 2nd largest element
+print(find_kth_largest(nums, k))
+nums = [3,2,3,1,2,4,5,5,6]
+k = 4 # output 4 is the 4th largest element since duplicates are counted
+print(find_kth_largest(nums, k))
+
+# 3 Longest subarray with absolute difference less than or equal to limit
+# Given an array of integers "nums" and an integer "limit", return the size
+# of the longest non-empty subarray such that the absolute difference 
+# between any two elements of this subarray is less than or equal to "limit".
+
+def longest_subarray(nums, limit):
+    max_deque = deque()
+    min_deque = deque()
+    left = 0
+    result = 0
+
+    for right in range(len(nums)):
+        while max_deque and nums[max_deque[-1]] <= nums[right]:
+            max_deque.pop()
+        while min_deque and nums[min_deque[-1]]>= nums[right]:
+            min_deque.pop()
+
+        max_deque.append(right)
+        min_deque.append(right)
+
+        while nums[max_deque[0]] - nums[min_deque[0]] > limit:
+            left += 1
+            if max_deque[0] < left:
+                max_deque.popleft()
+            if min_deque[0] < left:
+                min_deque.popleft()
+
+        result = max(result, right - left + 1)
+
+    return result
+
+print(longest_subarray([8, 2, 4, 7], 4))  # Output: 2
+print(longest_subarray([10, 1, 2, 4, 7, 2], 5))  # Output: 4
+print(longest_subarray([4, 2, 2, 2, 4, 4, 2, 2], 0))  # Output: 3
