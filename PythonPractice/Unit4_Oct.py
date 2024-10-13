@@ -7,7 +7,8 @@
 # You're curating a large collection of NFTs for a digital art gallery, and your first task is to extract the names of these NFTs from a given list of dictionaries. Each dictionary in the list represents an NFT, and contains information such as the name, creator, and current value.
 # Write the extract_nft_names() function, which takes in this list and returns a list of all NFT names.
 
-from imp import find_module
+
+
 from itertools import filterfalse
 import string
 
@@ -222,3 +223,143 @@ def subarray_sum(nums, k):
 nums = [1, 2, 3]
 k = 3
 print(subarray_sum(nums, k))
+
+# Unit 4 Advanced A
+
+# 5 What is the space complexity? bing say O(n)
+
+# def find_(arr):
+#     ele = set()
+#     for num in arr:
+#         ele.add(num)
+#     return list(ele)
+
+# 6 
+def process_numbers(nums, threshold):
+    stack = []
+    for num in nums:
+        if num < threshold:
+            stack.append(num)
+        elif num <= 10 and stack:
+            stack.pop()
+    return stack
+
+print(process_numbers([3,5,1,9,6,15], 8))
+
+# 7 debug
+def is_valid(s):
+    stack = []
+
+    for char in s:
+        if char =='(':
+            stack.append(char)
+        elif char == ')':
+            if stack and stack[-1] == '(':
+                stack.pop()
+            else:
+                return False
+    return len(stack) == 0
+
+# 1 Valid mountain array: There must be an ascent and descent
+
+def valid_mtn_arr(arr):
+    if len(arr) < 3:
+        return False
+    i = 0
+
+    while i < len(arr) - 1 and arr[i] < arr[i+1]:
+        i += 1
+
+    # peak cannot be the first or last element
+    if i == 0 or i == len(arr) - 1:
+        return False
+
+    while i < len(arr) - 1 and arr[i] > arr[i+ 1]:
+        i+=1
+
+    return i == len(arr) - 1     
+        
+arr = [2,1] # False
+print(valid_mtn_arr(arr))
+
+arr = [3,5,5] # False
+print(valid_mtn_arr(arr))
+
+arr = [0,3,2,1] # True
+print(valid_mtn_arr(arr))
+
+
+# 3 decode string
+
+def decode_string(s):
+    stack = []
+    current_num = 0
+    track_substring = ""
+
+    for char in s:
+        if char.isdigit():
+            current_num = current_num * 10 + int(char)
+        elif char == '[':
+            stack.append((track_substring, current_num))
+            track_substring = ""
+            current_num = 0
+        elif char == ']':
+            prev_string, num = stack.pop()
+
+            track_substring = prev_string + num * track_substring
+        else:
+            track_substring += char
+    return track_substring
+
+s = "3[a]2[bc]" # aaabcbc
+print(decode_string(s))
+
+s = "3[a2[c]]" # accaccacc
+print(decode_string(s))
+
+s = "2[abc]3[cd]ef" # abcabccdcdcdef
+print(decode_string(s))
+
+
+# 2 prime frequency map in 2d matrix
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False 
+        i += 6
+    return True
+
+def prime_frequency_map(matrix):
+    if not matrix:
+        return {}
+
+    prime_dict = {}
+
+    for row in matrix:
+        for num in row:
+            if is_prime(num):
+                if num in prime_dict:
+                    prime_dict[num] += 1
+                else:
+                    prime_dict[num] = 1
+
+    sorted_prime_dict = dict(sorted(prime_dict.items()))
+
+    return sorted_prime_dict
+
+matrix = [
+    [1,4,7,11,15],
+    [2,5,8,12,19],
+    [3,6,9,16,22],
+    [10,13,14,17,24],
+    [18,21,23,26,30]] # {2:1,3:1,5:1,7:1,11:1,13:1,17:1,19:1,23:1}
+
+print(prime_frequency_map(matrix))
