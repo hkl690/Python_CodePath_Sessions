@@ -351,9 +351,9 @@ def prime_frequency_map(matrix):
                 else:
                     prime_dict[num] = 1
 
-    sorted_prime_dict = dict(sorted(prime_dict.items()))
+    # sorted_prime_dict = dict(sorted(prime_dict.items())) their test cases didn't like this
 
-    return sorted_prime_dict
+    return prime_dict
 
 matrix = [
     [1,4,7,11,15],
