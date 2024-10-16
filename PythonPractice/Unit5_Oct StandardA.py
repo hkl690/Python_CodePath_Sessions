@@ -1,4 +1,5 @@
 # 4 Standard A
+from email.quoprimime import header_check
 from tokenize import Single
 
 
@@ -317,3 +318,274 @@ head_a = create_linked_list([])
 head_b = create_linked_list([])
 print("Test Case 4:")
 print_linked_list(longer_list(head_a, head_b))  # Expected Output: None
+
+# Advanced A
+class Node:
+    def __init__(self, value, next_node = None):
+        self.value = value
+        self.next = next_node
+
+def mystery_function(head_a, head_b):
+    if head_a is None or head_b is None:
+        return head_b, head_a
+
+    head_a.next, head_b.next = head_b.next, head_a.next
+    return head_b, head_a
+
+
+def print_linked_list(head):
+    current = head
+    while current:
+        print(current.value, end=" -> " if current.next else "")
+        current = current.next
+    print()
+
+head_a = Node(1, Node(2, Node(3)))
+head_b = Node(4, Node(5, Node(6)))
+head_a, head_b = mystery_function(head_a, head_b)
+# Print the linked lists
+print("head_a:")
+print_linked_list(head_a)
+print("head_b:", end=" ")
+print_linked_list(head_b)
+
+# 7 debug
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_node(self, node_data):
+        node = SinglyLinkedListNode(node_data)
+        if not self.head:
+            self.head = node
+        else:
+            self.tail.next = node
+        self.tail = node
+
+def print_singly_linked_list(node):
+    while node:
+        print(node.data, end=" -> ")
+        node = node.next
+    print("None")
+
+def create_linked_list(values):
+    if not values:
+        return None
+    head = SinglyLinkedListNode(values[0])
+    current = head
+    for value in values[1:]:
+        new_node = SinglyLinkedListNode(value)
+        current.next = new_node
+        current = new_node
+    return head
+
+def format_linked_list(node):
+    if node is None:
+        return 'None'
+    result = []
+    while node:
+        result.append(str(node.data))
+        node = node.next
+    return ' -> '.join(result)
+
+# Test the create_linked_list function
+values = [1, 2, 3, 4, 5]
+head = create_linked_list(values)
+print(format_linked_list(head))  # Expected output: 1 -> 2 -> 3 -> 4 -> 5 -> None
+
+values = []
+head = create_linked_list(values)
+print(format_linked_list(head))  # Expected output: None
+
+
+# 3 palindrome linked list
+
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+import ast
+
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_node(self, node_data):
+        node = SinglyLinkedListNode(node_data)
+
+        if not self.head:
+            self.head = node
+        else:
+            self.tail.next = node
+
+        self.tail = node
+
+# Helper function to print linked list (for testing)
+def print_linked_list(head):
+    current = head
+    output = []
+    while current:
+        output.append(str(current.data))
+        current = current.next
+    print(" -> ".join(output))
+
+# Complete the 'is_palindrome' function below.
+#
+# The function is expected to return a BOOLEAN.
+# The function accepts INTEGER_SINGLY_LINKED_LIST head as parameter.
+#
+# For your reference:#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+
+def is_palindrome(head):
+    values = []
+    current = head
+    while current:
+        values.append(current.data)
+        current = current.next
+    return values == values[::-1]
+
+# Create a linked list: 1 -> 2 -> 3 -> 2 -> 1
+linked_list = SinglyLinkedList()
+linked_list.insert_node(1)
+linked_list.insert_node(2)
+linked_list.insert_node(3)
+linked_list.insert_node(2)
+linked_list.insert_node(1)
+
+# Print the linked list
+print_linked_list(linked_list.head)  # Output: 1 -> 2 -> 3 -> 2 -> 1
+
+# Check if the linked list is a palindrome
+print(is_palindrome(linked_list.head))  # Output: True
+
+
+# 2 merge two sorted lists
+#!/bin/python
+
+import math
+import os
+import random
+import re
+import sys
+
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_node(self, node_data):
+        node = SinglyLinkedListNode(node_data)
+
+        if not self.head:
+            self.head = node
+        else:
+            self.tail.next = node
+
+        self.tail = node
+
+# Helper function to print linked list (for testing)
+def print_linked_list(head):
+    if head is None:
+        return []
+    current = head
+    output = []
+    while current:
+        output.append(current.data)
+        current = current.next
+    return output
+
+# Complete the 'merge_two_lists' function below.
+# The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+# The function accepts following parameters:
+#  1. INTEGER_SINGLY_LINKED_LIST l1
+#  2. INTEGER_SINGLY_LINKED_LIST l2
+
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+
+def merge_two_lists(l1, l2):
+    merger = SinglyLinkedListNode(0)
+    current = merger
+
+    while l1 and l2:
+        if l1.data < l2.data:
+            current.next = l1
+            l1 = l1.next
+        else:
+            current.next = l2
+            l2 = l2.next
+        current = current.next
+
+    if l1:
+        current.next = l1
+    if l2:
+        current.next = l2
+
+    return merger.next
+
+# Test the merge_two_lists function
+list1 = SinglyLinkedList()
+list1.insert_node(1)
+list1.insert_node(3)
+list1.insert_node(5)
+
+list2 = SinglyLinkedList()
+list2.insert_node(2)
+list2.insert_node(4)
+list2.insert_node(6)
+
+merged_head = merge_two_lists(list1.head, list2.head)
+print(print_linked_list(merged_head))  # Expected output: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> None
+
+# 1 DOES NOT WORK
+
+# Complete the 'remove_elements' function below.
+#
+# The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+# The function accepts following parameters:
+#  1. INTEGER_SINGLY_LINKED_LIST head
+#  2. INTEGER val
+
+# For your reference:
+#
+# SinglyLinkedListNode:
+#     int data
+#     SinglyLinkedListNode next
+
+# def remove_elements(head, val):
+#     temp_head = SinglyLinkedListNode(0)  # Use a temporary head node with a dummy value
+#     temp_head.next = head
+#     current = temp_head
+
+#     while current.next:
+#         if current.next.data == val:
+#             current.next = current.next.next
+#         else:
+#             current = current.next
+#     return temp_head.next
