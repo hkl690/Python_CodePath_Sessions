@@ -1,7 +1,6 @@
 ﻿# Problem 1: Building a Playlist
 # The assignment statement to the top_hits_2010s variable below creates the linked list Uptown Funk -> Party Rock Anthem -> Bad Romance. Break apart the assignment statement into multiple lines with one call to the Node constructor per line to recreate the list.
 
-
 class SongNode:
 	def __init__(self, song, next=None):
 		self.song = song
