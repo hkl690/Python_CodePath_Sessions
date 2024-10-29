@@ -129,3 +129,100 @@ print(search_range(nums, target))
 nums = [5,7,7,8,8,10]
 target = 6
 print(search_range(nums, target))
+
+# 6
+def recursive_helper2(index, stack, arr):
+    if index == len(arr):
+        return 0
+    stack.append(arr[index])
+    result = stack.pop() + recursive_helper2(index + 1, stack, arr)
+    return result
+
+def mystery_function3(arr):
+    stack = []
+    return recursive_helper2(0, stack, arr)
+
+print(mystery_function3([10,20,30]))
+
+# 7 debug
+def binary_search(nums, target):
+    if not nums:
+        return -1
+
+    mid = len(nums) // 2
+
+    if nums[mid] == target:
+        return mid
+
+    elif nums[mid] > target:
+        return binary_search(nums[:mid], target)
+
+    else:
+        result = binary_search(nums[mid+1:], target)
+        if result != -1:
+            return mid + 1 + result
+        else:
+            return -1
+
+# 2
+# Complete the 'find_first_occurrence' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. STRING_ARRAY names
+#  2. STRING val
+#
+
+def find_first_occurrence(names, val):
+    # Write your code here
+    left, right = 0, len(names) - 1
+    result = -1
+    
+    while left <= right:
+        mid = left + (right - left) // 2
+        if names[mid] == val:
+            result = mid
+            right = mid - 1
+        elif names[mid] < val:
+            left = mid + 1
+        else:
+            right = mid - 1
+            
+    return result
+
+
+names = ["Alice", "Bob", "Charlie", "David"]
+val = "Charlie" # output 2
+print(find_first_occurrence(names, val))
+
+names = ["Alice", "Bob", "Charlie", "David"]
+val = "Cat" # output -1
+print(find_first_occurrence(names, val))
+
+# 3 unique element
+# Given a sorted array consisting of only integers where every element appears exactly twice, except for one element which appears exactly once. Return the single element that appears only once. Run in O(log n) time and O(1) space.
+
+def single_non_duplicate(nums):
+    left, right = 0, len(nums) - 1
+
+    while left < right:
+        mid = left + (right - left) // 2
+
+        # ensure mid is even
+        if mid % 2 == 1:
+            mid -= 1
+
+        # check if the pair is broken
+        if nums[mid] == nums[mid + 1]:
+            left = mid + 2
+        else:
+            right = mid
+
+    return nums[left]
+
+# Test cases
+nums = [1, 1, 2, 3, 3, 4, 4, 8, 8]
+print(single_non_duplicate(nums))  # Output: 2
+
+nums = [3, 3, 7, 7, 10, 11, 11]
+print(single_non_duplicate(nums))  # Output: 10
