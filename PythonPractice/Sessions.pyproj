@@ -5,7 +5,7 @@
     <ProjectGuid>dd1177bb-406f-44bc-ad1d-1d29dd2fa5c8</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Unit6_AdvancedA.py</StartupFile>
+    <StartupFile>Unit8_StandardA.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -34,6 +34,7 @@
     <Compile Include="Unit6_StandardA.py" />
     <Compile Include="Unit7_AdvancedA.py" />
     <Compile Include="Unit7_StandardAandB.py" />
+    <Compile Include="Unit8_StandardA.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
